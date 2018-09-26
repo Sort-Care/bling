@@ -1,0 +1,7 @@
+let a = ARG1;
+let b = ARG2;
+
+if (a > b)
+  print a;
+else
+  print b;

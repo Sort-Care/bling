@@ -34,4 +34,14 @@ public class State {
 	public Value set(Id id, Value v) {
 		return state.put(id.name, v);
 	}
+
+	/**
+	 * Set the value associated with {@code id}
+	 * @param id
+	 * @param v
+	 * @return
+	 */
+	public Value set(String id, Value v) {
+		return state.put(id, v);
+	}
 }

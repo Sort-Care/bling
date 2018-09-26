@@ -1,5 +1,7 @@
 package bling;
 
+import bling.exception.*;
+
 public class IfStmt implements Statement {
 	final Expr cond;
 	final Statement thenClause;
@@ -13,7 +15,16 @@ public class IfStmt implements Statement {
 	
 	@Override
 	public void execute() {
-		throw new RuntimeException("Not Implemented");
+		if (cond.type() != Type.BOOL) {
+			throw new TypeError("If conditions must be booleans");
+		}
+		if (((BoolValue)cond.evaluate()).value) {
+			thenClause.execute();
+		} else {
+			if (elseClause != null) {
+				elseClause.execute();
+			}
+		}
 	}
 
 }

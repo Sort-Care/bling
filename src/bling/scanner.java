@@ -46,7 +46,7 @@ public class scanner {
         	sb.append((char)next_char);
         	advance();
 
-        	while (Character.isAlphabetic(next_char)) {
+        	while (Character.isJavaIdentifierPart(next_char)) {
         		sb.append((char)next_char);
         		advance();
         	}

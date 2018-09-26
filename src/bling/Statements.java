@@ -12,4 +12,10 @@ public class Statements implements ASTNode {
 	public void add(Statement s) {
 		stmts.add(s);
 	}
+	
+	public void execute() {
+		for (Statement s : stmts) {
+			s.execute();
+		}
+	}
 }

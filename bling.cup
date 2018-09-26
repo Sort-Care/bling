@@ -33,16 +33,22 @@ precedence left TIMES, NOT;
 precedence left UMINUS;
 
 /* The grammar rules */
-program ::= statements;
+program ::= statements:ss
+		{: RESULT = new Program(ss); :}
+		;
 statements ::= 
 				{: RESULT = new Statements(); :}
             |  statements:ss statement:s
 				{: (RESULT = ss).add(s); :}
             ;
-statement ::= letStmt
-			| ifStmt
-			| printStmt
-			| block
+statement ::= letStmt:s
+                {: RESULT = s; :}
+			| ifStmt:s
+                {: RESULT = s; :}
+			| printStmt:s
+                {: RESULT = s; :}
+			| block:s
+                {: RESULT = s; :}
 			;
 letStmt ::= LET ID:id EQ expr:e SEMI
 		{: RESULT = new LetStatement(id, e); :}

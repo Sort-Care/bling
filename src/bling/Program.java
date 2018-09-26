@@ -19,5 +19,9 @@ public class Program implements ASTNode {
 	public Program(Statements stmts) {
 		this.stmts = stmts;
 	}
+	
+	public void execute() {
+		stmts.execute();
+	}
 
 }

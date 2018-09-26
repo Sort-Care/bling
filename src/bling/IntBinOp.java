@@ -7,6 +7,7 @@ public abstract class IntBinOp extends IntExpr {
 	protected IntValue value;
 	
 	protected IntBinOp(Expr lhs, Expr rhs) {
+		assert lhs != null  && rhs != null;
 		this.lhs = lhs;
 		this.rhs = rhs;
 		value = null;
@@ -35,7 +36,7 @@ public abstract class IntBinOp extends IntExpr {
             if (lhs.type() != Type.INT || rhs.type() != Type.INT) {
                 throw new RuntimeException("Expected integer");
             }
-            value = new IntValue(compute(((IntValue)lhs.evaluate()).value, ((IntValue)rhs).value));
+            value = new IntValue(compute(((IntValue)lhs.evaluate()).value, ((IntValue)rhs.evaluate()).value));
 		}
 		return value;
 	}

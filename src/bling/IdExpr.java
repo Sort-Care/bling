@@ -17,7 +17,6 @@ public class IdExpr implements Expr {
 
 	@Override
 	public Value evaluate() {
-		// TODO Auto-generated method stub
-		return null;
+		return Program.state.get(id);
 	}
 }

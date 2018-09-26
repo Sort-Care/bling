@@ -3,12 +3,10 @@ package bling;
 public abstract class BoolBinOp extends BoolExpr {
 	protected final Expr lhs;
 	protected final Expr rhs;
-	protected BoolValue value;
 	
 	protected BoolBinOp(Expr lhs, Expr rhs) {
 		this.lhs = lhs;
 		this.rhs = rhs;
-		value = null;
 	}
 
 	/**
@@ -30,16 +28,13 @@ public abstract class BoolBinOp extends BoolExpr {
 
 	@Override
 	public BoolValue evaluate() {
-		if (value == null) {
-            if (lhs.type() != Type.BOOL) {
-                throw new RuntimeException("Expected boolean");
-            }
-            if (rhs.type() != Type.BOOL) {
-                throw new RuntimeException("Expected boolean");
-            }
-            value = compute(lhs, rhs);
-		}
-		return value;
+        if (lhs.type() != Type.BOOL) {
+            throw new RuntimeException("Expected boolean");
+        }
+        if (rhs.type() != Type.BOOL) {
+            throw new RuntimeException("Expected boolean");
+        }
+        return compute(lhs, rhs);
 	}
 	
 	/**
