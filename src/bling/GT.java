@@ -2,7 +2,7 @@ package bling;
 
 public class GT extends RelOp {
 	
-	public GT(IntExpr lhs, IntExpr rhs) {
+	public GT(Expr lhs, Expr rhs) {
 		super(lhs, rhs);
 	}
 

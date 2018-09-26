@@ -2,7 +2,7 @@ package bling;
 
 public class IntMinus extends IntBinOp {
 
-	protected IntMinus(IntExpr lhs, IntExpr rhs) {
+	protected IntMinus(Expr lhs, Expr rhs) {
 		super(lhs, rhs);
 	}
 

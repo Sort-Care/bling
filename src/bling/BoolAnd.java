@@ -2,7 +2,7 @@ package bling;
 
 public class BoolAnd extends BoolBinOp {
 
-	protected BoolAnd(BoolExpr lhs, BoolExpr rhs) {
+	protected BoolAnd(Expr lhs, Expr rhs) {
 		super(lhs, rhs);
 	}
 

@@ -2,7 +2,7 @@ package bling;
 
 public class IntAdd extends IntBinOp {
 
-	public IntAdd(IntExpr lhs, IntExpr rhs) {
+	public IntAdd(Expr lhs, Expr rhs) {
 		super(lhs, rhs);
 	}
 

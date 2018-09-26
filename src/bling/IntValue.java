@@ -1,6 +1,6 @@
 package bling;
 
-public class IntValue extends IntExpr {
+public class IntValue extends IntExpr implements Value {
 	final Integer value;
 
 	public IntValue(Integer n) {
@@ -18,5 +18,14 @@ public class IntValue extends IntExpr {
 		}
 		return false;
 	}
+	
+	@Override
+	public Integer baseValue() {
+		return value;
+	}
 
+	@Override
+	public String toString() {
+		return value.toString();
+	}
 }

@@ -1,6 +1,6 @@
 package bling;
 
-public class BoolValue extends BoolExpr {
+public class BoolValue extends BoolExpr implements Value {
 	final Boolean value;
 	
 	public final static BoolValue TRUE  = new BoolValue(true);
@@ -25,5 +25,14 @@ public class BoolValue extends BoolExpr {
 		}
 		return false;
 	}
+	
+	@Override
+	public Boolean baseValue() {
+		return value;
+	}
 
+	@Override
+	public String toString() {
+		return value.toString();
+	}
 }

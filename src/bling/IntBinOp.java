@@ -2,11 +2,11 @@ package bling;
 
 public abstract class IntBinOp extends IntExpr {
 	
-	protected final IntExpr lhs;
-	protected final IntExpr rhs;
+	protected final Expr lhs;
+	protected final Expr rhs;
 	protected IntValue value;
 	
-	protected IntBinOp(IntExpr lhs, IntExpr rhs) {
+	protected IntBinOp(Expr lhs, Expr rhs) {
 		this.lhs = lhs;
 		this.rhs = rhs;
 		value = null;
@@ -16,7 +16,7 @@ public abstract class IntBinOp extends IntExpr {
 	 * Return the left operand of this binop expr
 	 * @return
 	 */
-	public IntExpr lhs() {
+	public Expr lhs() {
 		return lhs;
 	}
 
@@ -24,7 +24,7 @@ public abstract class IntBinOp extends IntExpr {
 	 * Return the right operand of this binop expr
 	 * @return
 	 */
-	public IntExpr rhs() {
+	public Expr rhs() {
 		return rhs;
 	}
 

@@ -12,5 +12,5 @@ public interface Expr extends ASTNode {
 	 * Recursively compute the value of this Expr
 	 * @return
 	 */
-	public abstract Expr evaluate();
+	public abstract Value evaluate();
 }

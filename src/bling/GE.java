@@ -1,7 +1,7 @@
 package bling;
 public class GE extends RelOp {
 
-	public GE(IntExpr lhs, IntExpr rhs) {
+	public GE(Expr lhs, Expr rhs) {
 		super(lhs, rhs);
 	}
 

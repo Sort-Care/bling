@@ -2,10 +2,10 @@ package bling;
 
 public class Not extends BoolExpr {
 
-	final BoolExpr operand;
+	final Expr operand;
 	BoolValue value = null;
 
-	public Not(BoolExpr operand) {
+	public Not(Expr operand) {
 		this.operand = operand;
 	}
 
@@ -15,7 +15,7 @@ public class Not extends BoolExpr {
             if (operand.type() != Type.BOOL) {
                 throw new RuntimeException("Expected boolean");
             }
-			value = BoolValue.getBoolValue(!operand.evaluate().value);
+			value = BoolValue.getBoolValue(!((BoolValue)operand.evaluate()).value);
 		}
 		return value;
 	}
