@@ -6,7 +6,7 @@ public class GE extends RelOp {
 	}
 
 	@Override
-	protected Boolean compute(Integer l, Integer r) {
+	protected Boolean compute(Long l, Long r) {
 		return l >= r;
 	}
 }

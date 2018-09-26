@@ -1,0 +1,51 @@
+let trian = 0;
+let a = ARG1;
+let b = ARG2;
+let c = ARG3;
+
+let INVALID = 0;
+let SCALENE = 1;
+let EQUILATERAL = 2;
+let ISOSCELES = 3;
+let UNKNOWN = 4;
+
+let result = UNKNOWN;
+
+if ((a <= 0) | (b <= 0) | (c <= 0)) {
+  let result = INVALID;
+} else {
+    if (a = b) {
+        let trian = trian + 1;
+    }
+    if (b = c) {
+        let trian = trian + 2;
+    }
+    if (a = c) {
+        let trian = trian + 3;
+    }
+}
+if (trian = 0) {
+    if ((a + b < c) | (a + c < b) | (b + c < a)) {
+        let result = INVALID;
+    } else {
+        let result = SCALENE;
+    }
+} 
+if ((result = UNKNOWN) & (trian > 3)) {
+    let result = EQUILATERAL;
+}
+if ((result = UNKNOWN) & (trian = 1) & (a + b > c)) {
+    let result = ISOSCELES;
+}
+if ((result = UNKNOWN) & (trian = 2) & (a + c > b)) {
+    let result = ISOSCELES;
+}
+
+
+if ((result = UNKNOWN) & (trian = 3) & (b + c > a)) {
+    let result = ISOSCELES;
+}
+if (result = UNKNOWN) {
+    let result = INVALID;
+}
+print result;

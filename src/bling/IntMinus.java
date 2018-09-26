@@ -7,7 +7,7 @@ public class IntMinus extends IntBinOp {
 	}
 
 	@Override
-	protected Integer compute(Integer l, Integer r) {
+	protected Long compute(Long l, Long r) {
 		return l - r;
 	}
 }

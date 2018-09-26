@@ -14,8 +14,8 @@ scan with {: return s.next_token(); :};
 /* Terminals (tokens returned by the scanner). */
 terminal          SEMI, PLUS, MINUS, TIMES, UMINUS, DIVIDE, LPAREN, RPAREN, IF, ELSE, 
 				  LBRACE, RBRACE, AND, OR, NOT, LET, EQ, LT, GT, LE, GE, NE, PRINT,
-				  TRUE, FALSE;
-terminal Integer  NUMBER;        // our scanner provides numbers as integers
+				  TRUE, FALSE, WHILE;
+terminal Long     NUMBER;        // our scanner provides numbers as integers
 terminal Boolean  BOOL;
 terminal Id       ID;
 
@@ -23,7 +23,7 @@ terminal Id       ID;
 non terminal Program    program;
 non terminal Statements statements;
 non terminal Statement  statement;
-non terminal Statement  letStmt, ifStmt, printStmt, block;
+non terminal Statement  letStmt, ifStmt, printStmt, block, whileLoop;
 non terminal Expr       expr, simpleExpr, term, factor;
 non terminal Integer    multOp, addOp, relOp;    
 
@@ -45,6 +45,8 @@ statement ::= letStmt:s
                 {: RESULT = s; :}
 			| ifStmt:s
                 {: RESULT = s; :}
+			| whileLoop:s
+                {: RESULT = s; :}
 			| printStmt:s
                 {: RESULT = s; :}
 			| block:s
@@ -58,6 +60,9 @@ ifStmt		::=	IF LPAREN expr:c RPAREN statement:then
 		 	|	IF LPAREN expr:c RPAREN statement:then ELSE statement:els
 				{: RESULT = new IfStmt(c, then, els); :}
 			;
+whileLoop	::=	WHILE LPAREN expr:c RPAREN statement:body
+				{: RESULT = new WhileLoop(c, body); :}
+            ;
 printStmt	::= PRINT expr:e SEMI
 				{: RESULT = new PrintStmt(e); :}
 			;

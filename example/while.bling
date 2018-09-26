@@ -1,0 +1,10 @@
+let a = ARG1;
+let i = 0;
+let total = a;
+
+while (i < a) {
+  let total = total + a;
+  let i = i + 1;
+}
+
+print total;

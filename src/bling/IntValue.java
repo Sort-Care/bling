@@ -1,11 +1,16 @@
 package bling;
 
 public class IntValue extends IntExpr implements Value {
-	final Integer value;
+	final Long value;
 
 	public IntValue(Integer n) {
+		this.value = (long)n;
+	}
+
+	public IntValue(Long n) {
 		this.value = n;
 	}
+
 
 	@Override
 	public IntValue evaluate() {
@@ -20,7 +25,7 @@ public class IntValue extends IntExpr implements Value {
 	}
 	
 	@Override
-	public Integer baseValue() {
+	public Long baseValue() {
 		return value;
 	}
 

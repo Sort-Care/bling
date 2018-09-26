@@ -1,0 +1,9 @@
+let total = 1;
+let i = 0;
+
+while (i < ARG1)  {
+  let i = i + 1;
+  let total = total * i;
+}
+
+print total;

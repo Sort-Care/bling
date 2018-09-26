@@ -4,12 +4,10 @@ public abstract class RelOp extends BoolExpr {
 
 	protected final Expr lhs;
 	protected final Expr rhs;
-	protected BoolValue value;
 	
 	protected RelOp(Expr lhs, Expr rhs) {
 		this.lhs = lhs;
 		this.rhs = rhs;
-		value = null;
 	}
 
 	/**
@@ -31,17 +29,14 @@ public abstract class RelOp extends BoolExpr {
 
 	@Override
 	public BoolValue evaluate() {
-		if (value == null) {
-            if (lhs.type() != Type.INT || rhs.type() != Type.INT) {
-                throw new RuntimeException("Expected integer");
-            }
-            Boolean b = compute(((IntValue)lhs.evaluate()).value, 
-            				     ((IntValue)rhs.evaluate()).value );
-            value = BoolValue.getBoolValue(b);
-		}
-		return value;
+        if (lhs.type() != Type.INT || rhs.type() != Type.INT) {
+            throw new RuntimeException("Expected integer");
+        }
+        Boolean b = compute(((IntValue)lhs.evaluate()).value, 
+                             ((IntValue)rhs.evaluate()).value );
+        return  BoolValue.getBoolValue(b);
 	}
 	
-	protected abstract Boolean compute(Integer l, Integer r);
+	protected abstract Boolean compute(Long l, Long r);
 
 }

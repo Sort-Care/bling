@@ -4,12 +4,10 @@ public class EQ extends BoolExpr {
 	
 	protected final Expr lhs;
 	protected final Expr rhs;
-	protected BoolValue value;
 	
 	protected EQ(Expr lhs, Expr rhs) {
 		this.lhs = lhs;
 		this.rhs = rhs;
-		value = null;
 	}
 
 	/**

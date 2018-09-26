@@ -1,0 +1,12 @@
+let i = 0;
+let a = 0;
+let b = 1;
+
+while (i < ARG1) {
+  let tmp = a + b;
+  let a = b;
+  let b = tmp;
+  let i = i + 1;
+}
+
+print a;

@@ -38,7 +38,7 @@ public class scanner {
             i_val = i_val * 10 + (next_char - '0');
             advance();
             } while (next_char >= '0' && next_char <= '9');
-            return sf.newSymbol("NUMBER",sym.NUMBER, new Integer(i_val));
+            return sf.newSymbol("NUMBER",sym.NUMBER, new Long(i_val));
         case 'a': case 'b': case 'c': case 'e': case 'd': case 'f': case 'g': case 'h': case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p': case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x': case 'y': case 'z': 
         case 'A': case 'B': case 'C': case 'E': case 'D': case 'F': case 'G': case 'H': case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P': case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X': case 'Y': case 'Z':
         	/* parse a keyword or an id */
@@ -66,6 +66,8 @@ public class scanner {
                     return sf.newSymbol("LET", sym.LET);
                 case "print":
                 	return sf.newSymbol("PRINT", sym.PRINT);
+                case "while":
+                	return sf.newSymbol("WHILE", sym.WHILE);
                 default:
                     return sf.newSymbol("ID", sym.ID, new Id(id));
         	}

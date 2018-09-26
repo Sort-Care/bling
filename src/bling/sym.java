@@ -17,6 +17,7 @@ public interface sym {
   public static final int OR = 15;
   public static final int RBRACE = 13;
   public static final int RPAREN = 9;
+  public static final int WHILE = 27;
   public static final int SEMI = 2;
   public static final int NOT = 16;
   public static final int TRUE = 25;
@@ -24,9 +25,9 @@ public interface sym {
   public static final int GT = 20;
   public static final int LPAREN = 8;
   public static final int LBRACE = 12;
-  public static final int ID = 29;
+  public static final int ID = 30;
   public static final int LE = 21;
-  public static final int NUMBER = 27;
+  public static final int NUMBER = 28;
   public static final int EOF = 0;
   public static final int DIVIDE = 7;
   public static final int FALSE = 26;
@@ -36,7 +37,7 @@ public interface sym {
   public static final int error = 1;
   public static final int LET = 17;
   public static final int EQ = 18;
-  public static final int BOOL = 28;
+  public static final int BOOL = 29;
   public static final int UMINUS = 6;
   public static final String[] terminalNames = new String[] {
   "EOF",
@@ -66,6 +67,7 @@ public interface sym {
   "PRINT",
   "TRUE",
   "FALSE",
+  "WHILE",
   "NUMBER",
   "BOOL",
   "ID"

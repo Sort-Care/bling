@@ -3,16 +3,24 @@ package bling;
 public class WhileLoop implements Statement {
 	
 	final Expr cond;
-	final Expr body;
+	final Statement body;
 	
-	public WhileLoop(Expr cond, Expr body) {
+	public WhileLoop(Expr cond, Statement body) {
 		this.cond = cond;
 		this.body = body;
 	}
 
 	@Override
 	public void execute() {
-		// TODO Auto-generated method stub
+		while(true) {
+			if (cond.type() != Type.BOOL) {
+				throw new bling.exception.TypeError("while loop Conditional must be a boolean");
+			}
+			if (!((BoolValue)cond.evaluate()).value) {
+				break;
+			}
+			body.execute();
+		}
 		
 	}
 
