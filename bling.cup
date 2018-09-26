@@ -1,0 +1,128 @@
+/* Simple +/-/* expression language; parser evaluates constant expressions on the fly*/
+import java_cup.runtime.*;
+
+parser code {:
+    // Connect this parser to a scanner!
+    scanner s;
+    Parser(scanner s){ this.s=s; }
+:}
+
+/* define how to connect to the scanner! */
+init with {: s.init(); :};
+scan with {: return s.next_token(); :};
+
+/* Terminals (tokens returned by the scanner). */
+terminal          SEMI, PLUS, MINUS, TIMES, UMINUS, DIVIDE, LPAREN, RPAREN, IF, ELSE, 
+				  LBRACE, RBRACE, AND, OR, NOT, LET, EQ, LT, GT, LE, GE, NE, PRINT,
+				  TRUE, FALSE;
+terminal Integer  NUMBER;        // our scanner provides numbers as integers
+terminal Boolean  BOOL;
+terminal Id       ID;
+
+/* Non terminals */
+non terminal Program    program;
+non terminal Statements statements;
+non terminal Statement  statement;
+non terminal Statement  letStmt, ifStmt, printStmt, block;
+non terminal Expr       expr, simpleExpr, term, factor;
+non terminal Integer    multOp, addOp, relOp;    
+
+/* Precedences */
+precedence left PLUS, MINUS, AND, OR;
+precedence left TIMES, NOT;
+precedence left UMINUS;
+
+/* The grammar rules */
+program ::= statements;
+statements ::= 
+				{: RESULT = new Statements(); :}
+            |  statements:ss statement:s
+				{: (RESULT = ss).add(s); :}
+            ;
+statement ::= letStmt
+			| ifStmt
+			| printStmt
+			| block
+			;
+letStmt ::= LET ID:id EQ expr:e SEMI
+		{: RESULT = new LetStatement(id, e); :}
+		;
+ifStmt		::=	IF LPAREN expr:c RPAREN statement:then
+				{: RESULT = new IfStmt(c, then, null); :}
+		 	|	IF LPAREN expr:c RPAREN statement:then ELSE statement:els
+				{: RESULT = new IfStmt(c, then, els); :}
+			;
+printStmt	::= PRINT expr:e SEMI
+				{: RESULT = new PrintStmt(e); :}
+			;
+block		::= LBRACE statements:ss RBRACE
+				{: RESULT = new Block(ss); :}
+			;
+expr		::=	simpleExpr:e 
+				{: RESULT = e; :}
+			| simpleExpr:l relOp:op simpleExpr:r
+				{: 
+					switch(op) {
+						case sym.EQ:		RESULT = new EQ(l, r); break;
+						case sym.GT:		RESULT = new GT(l, r); break;
+						case sym.GE:		RESULT = new GE(l, r); break;
+						case sym.LT:		RESULT = new LT(l, r); break;
+						case sym.LE:		RESULT = new LE(l, r); break;
+						default: throw new RuntimeException("Parse error");
+					}
+				:}
+            ;
+simpleExpr	::= term:e
+				{: RESULT = e; :}
+			| simpleExpr:l addOp:op term:r
+				{: 
+					switch(op) {
+						case sym.PLUS: 	RESULT = new IntAdd(l, r); break;
+						case sym.OR: 	RESULT = new BoolOr(l, r); break;
+						case sym.MINUS:	RESULT = new IntMinus(l, r); break;
+						default: throw new RuntimeException("Parse error");
+					}
+				:}
+			;
+
+term 		::= factor:e 
+				{: RESULT = e; :}
+			| term:l multOp:op factor:r
+				{: 
+					switch(op) {
+						case sym.AND:		RESULT = new BoolAnd(l, r); break;
+						case sym.TIMES:		RESULT = new IntTimes(l, r); break;
+						case sym.DIVIDE:	RESULT = new IntDivide(l, r); break;
+						default: throw new RuntimeException("Parse error");
+					} 
+				:}
+			;
+
+multOp		::= AND			{: RESULT = sym.AND; :}
+			|   TIMES		{: RESULT = sym.TIMES; :}
+			|   DIVIDE		{: RESULT = sym.DIVIDE; :}
+			;
+
+addOp		::= PLUS		{: RESULT = sym.PLUS; :}
+			|   OR			{: RESULT = sym.OR; :}
+			|   MINUS		{: RESULT = sym.MINUS; :}
+			;
+
+
+relOp 		::= EQ			{: RESULT = sym.EQ; :}
+			|	NE			{: RESULT = sym.NE; :}
+			|	GT			{: RESULT = sym.GT; :}
+			|	GE			{: RESULT = sym.GE; :}
+			|	LT			{: RESULT = sym.LT; :}
+			|	LE			{: RESULT = sym.LE; :}
+			;
+
+factor 		::= ID:ident
+				{: RESULT = new IdExpr(ident); :}
+			| LPAREN expr:e RPAREN
+				{: RESULT = new ParenExpr(e); :}
+			| NOT factor:e
+				{: RESULT = new Not(e); :}
+			| NUMBER:n
+				{: RESULT = new IntValue(n); :}
+            ;
