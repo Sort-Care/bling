@@ -31,7 +31,7 @@ public abstract class IntBinOp extends IntExpr {
 	@Override
 	public IntValue evaluate() {
         if (lhs.type() != Type.INT || rhs.type() != Type.INT) {
-            throw new RuntimeException("Expected integer");
+            throw new bling.exception.TypeError("Expected integer");
         }
         return new IntValue(compute(((IntValue)lhs.evaluate()).value, ((IntValue)rhs.evaluate()).value));
 	}

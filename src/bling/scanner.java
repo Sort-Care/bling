@@ -97,6 +97,7 @@ public class scanner {
         case '+': advance(); return sf.newSymbol("PLUS",sym.PLUS);
         case '-': advance(); return sf.newSymbol("MINUS",sym.MINUS);
         case '*': advance(); return sf.newSymbol("TIMES",sym.TIMES);
+        case '%': advance(); return sf.newSymbol("MOD", sym.MOD);
         case '/': advance(); return sf.newSymbol("DIVIDE",sym.DIVIDE);
         case '(': advance(); return sf.newSymbol("LPAREN",sym.LPAREN);
         case ')': advance(); return sf.newSymbol("RPAREN",sym.RPAREN);

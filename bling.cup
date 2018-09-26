@@ -12,11 +12,10 @@ init with {: s.init(); :};
 scan with {: return s.next_token(); :};
 
 /* Terminals (tokens returned by the scanner). */
-terminal          SEMI, PLUS, MINUS, TIMES, UMINUS, DIVIDE, LPAREN, RPAREN, IF, ELSE, 
+terminal          SEMI, PLUS, MINUS, TIMES,  DIVIDE, LPAREN, RPAREN, IF, ELSE, 
 				  LBRACE, RBRACE, AND, OR, NOT, LET, EQ, LT, GT, LE, GE, NE, PRINT,
-				  TRUE, FALSE, WHILE;
+				  TRUE, FALSE, WHILE, MOD;
 terminal Long     NUMBER;        // our scanner provides numbers as integers
-terminal Boolean  BOOL;
 terminal Id       ID;
 
 /* Non terminals */
@@ -30,7 +29,6 @@ non terminal Integer    multOp, addOp, relOp;
 /* Precedences */
 precedence left PLUS, MINUS, AND, OR;
 precedence left TIMES, NOT;
-precedence left UMINUS;
 
 /* The grammar rules */
 program ::= statements:ss
@@ -104,6 +102,7 @@ term 		::= factor:e
 						case sym.AND:		RESULT = new BoolAnd(l, r); break;
 						case sym.TIMES:		RESULT = new IntTimes(l, r); break;
 						case sym.DIVIDE:	RESULT = new IntDivide(l, r); break;
+						case sym.MOD:		RESULT = new IntMod(l, r); break;
 						default: throw new RuntimeException("Parse error");
 					} 
 				:}
@@ -112,6 +111,7 @@ term 		::= factor:e
 multOp		::= AND			{: RESULT = sym.AND; :}
 			|   TIMES		{: RESULT = sym.TIMES; :}
 			|   DIVIDE		{: RESULT = sym.DIVIDE; :}
+			|   MOD			{: RESULT = sym.MOD; :}
 			;
 
 addOp		::= PLUS		{: RESULT = sym.PLUS; :}
@@ -134,6 +134,12 @@ factor 		::= ID:ident
 				{: RESULT = new ParenExpr(e); :}
 			| NOT factor:e
 				{: RESULT = new Not(e); :}
+			| MINUS factor:e
+				{: RESULT = new Neg(e); :}
 			| NUMBER:n
 				{: RESULT = new IntValue(n); :}
+			| TRUE
+				{: RESULT = BoolValue.TRUE; :}
+			| FALSE
+				{: RESULT = BoolValue.FALSE; :}
             ;
