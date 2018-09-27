@@ -1,3 +1,4 @@
+
 let trian = 0;
 let a = ARG1;
 let b = ARG2;
@@ -48,4 +49,17 @@ if ((result = UNKNOWN) & (trian = 3) & (b + c > a)) {
 if (result = UNKNOWN) {
     let result = INVALID;
 }
-print result;
+
+print "Triangle with sides of length a = " + a + ", b = " + b + ", c = " + c + ":";
+if (result = UNKNOWN) {
+  print "    UNKNOWN";
+} else if (result = ISOSCELES) {
+  print "    ISOSCELES";
+} else if (result = SCALENE) {
+  print "    SCALENE";
+} else if (result = EQUILATERAL) {
+
+  print "    EQUILATERAL";
+} else {          # INVALID
+  print "    Oh deary me, something's wrong...";
+}

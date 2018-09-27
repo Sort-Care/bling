@@ -9,4 +9,4 @@ while (i < ARG1) {
   let i = i + 1;
 }
 
-print a;
+print "The " + ARG1 + "th Fibonacci number is " + a;

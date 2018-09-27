@@ -4,27 +4,40 @@ This is a tiny language (a *lingo*) demonstrating JavaCUP. I built it in a day.
 It's very nice. Much wow.
 
 # Setup
+## Unix
 
 Run the following:
 ```bash
+mkdir bin
 java -jar libs/java-cup-11b.jar -package "bling" -interface -parser "Parser" -destdir src/bling -expect 1 "bling.cup"
 javac -g -cp libs/java-cup-11b-runtime.jar:. -d bin src/bling/*.java src/bling/exception/*.java
 ```
 
-This will generate the parser and compile the interpreter. Note that you may
-have to create the `bin` directory if it does not already exist:
-
-```
-mkdir bin
-```
+## Windows
+Something like the thing up above, but with different slashes and, I dunno, just
+worse everything.
 
 # Running
 
 ```bash
 ./bling example/factorial 10
+./bling example/fib.bling 10
+./bling example/triangle.bling 3 4 5
+./bling example/triangle.bling 1 1 1
+./bling example/triangle.bling -1 1 1
 ```
 
 So easy, right?
+
+## Printing the AST
+Run as above, but with the `--print-ast` option as the first argument:
+
+```bash
+./bling --print-ast example/fib.bling
+```
+
+Note that the program will not run so there is no need to provide other
+arguments.
 
 # The Language
 Each program is a sequence of statements. Each statement is either
