@@ -1,6 +1,6 @@
 # Bling: Ben's Lingo
 
-This is a tiny language (a *lingo*) demonstrating JavaCUP. I built it in a day.
+This is a tiny language (a *lingo*) demonstrating JavaCUP. I built it today.
 It's very nice. Much wow.
 
 # Setup
