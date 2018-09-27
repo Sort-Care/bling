@@ -28,6 +28,7 @@ public class scanner {
     /* recognize and return the next complete token */
     public Symbol next_token() throws java.io.IOException
     {
+    	StringBuilder sb;
     for (;;)
         switch (next_char)
         {
@@ -42,7 +43,7 @@ public class scanner {
         case 'a': case 'b': case 'c': case 'e': case 'd': case 'f': case 'g': case 'h': case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p': case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x': case 'y': case 'z': 
         case 'A': case 'B': case 'C': case 'E': case 'D': case 'F': case 'G': case 'H': case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P': case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X': case 'Y': case 'Z':
         	/* parse a keyword or an id */
-        	StringBuilder sb = new StringBuilder();
+        	sb = new StringBuilder();
         	sb.append((char)next_char);
         	advance();
 
@@ -73,6 +74,23 @@ public class scanner {
         	}
         	
 
+        case '"': 
+        	// start index of string
+        	int state = 0;
+        	int start = idx;
+        	advance();
+        	while ((char)next_char != (char)'"') {
+        		if (!Character.isValidCodePoint(next_char)) {
+        			throw new RuntimeException("Unrecognized string character: " + (char)next_char);
+        		}
+        		if (next_char == '\\') {
+        			advance();
+        		}
+        		advance();
+        	}
+        	advance();
+        	return sf.newSymbol("STRING", sym.STRING, program.substring(start,  idx - 2));
+        	
         case ';': advance(); return sf.newSymbol("SEMI",sym.SEMI);
         case '<': 
         	advance(); 

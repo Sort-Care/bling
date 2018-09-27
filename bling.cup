@@ -17,6 +17,7 @@ terminal          SEMI, PLUS, MINUS, TIMES,  DIVIDE, LPAREN, RPAREN, IF, ELSE,
 				  TRUE, FALSE, WHILE, MOD;
 terminal Long     NUMBER;        // our scanner provides numbers as integers
 terminal Id       ID;
+terminal String   STRING;
 
 /* Non terminals */
 non terminal Program    program;
@@ -86,7 +87,7 @@ simpleExpr	::= term:e
 			| simpleExpr:l addOp:op term:r
 				{: 
 					switch(op) {
-						case sym.PLUS: 	RESULT = new IntAdd(l, r); break;
+						case sym.PLUS: 	RESULT = new Add(l, r); break;
 						case sym.OR: 	RESULT = new BoolOr(l, r); break;
 						case sym.MINUS:	RESULT = new IntMinus(l, r); break;
 						default: throw new RuntimeException("Parse error");
@@ -142,4 +143,6 @@ factor 		::= ID:ident
 				{: RESULT = BoolValue.TRUE; :}
 			| FALSE
 				{: RESULT = BoolValue.FALSE; :}
+			| STRING:s
+				{: RESULT = new StringValue(s); :}
             ;

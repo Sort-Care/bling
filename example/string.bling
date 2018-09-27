@@ -1,0 +1,6 @@
+let s = "This is a test string
+second line";
+
+let s2 = "This is a subsequent string";
+print s + "
+" + s2;

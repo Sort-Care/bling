@@ -28,6 +28,7 @@ public interface sym {
   public static final int LBRACE = 11;
   public static final int ID = 29;
   public static final int LE = 20;
+  public static final int STRING = 30;
   public static final int NUMBER = 28;
   public static final int EOF = 0;
   public static final int DIVIDE = 6;
@@ -68,7 +69,8 @@ public interface sym {
   "WHILE",
   "MOD",
   "NUMBER",
-  "ID"
+  "ID",
+  "STRING"
   };
 }
 
