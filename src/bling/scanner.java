@@ -91,6 +91,12 @@ public class scanner {
         	advance();
         	return sf.newSymbol("STRING", sym.STRING, program.substring(start,  idx - 2));
         	
+        case '#': 
+        	do {
+                advance();
+        	} while (next_char != '\n');
+        	return next_token();
+
         case ';': advance(); return sf.newSymbol("SEMI",sym.SEMI);
         case '<': 
         	advance(); 

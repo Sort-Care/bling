@@ -39,7 +39,11 @@ public class Bling {
     		} else if (arg.equals("false")) {
     			value = BoolValue.getBoolValue(false);
     		} else {
-    			value = new IntValue(Integer.parseInt(arg));
+    			try {
+                    value = new IntValue(Integer.parseInt(arg));
+    			} catch (Exception e) {
+    				value = new StringValue(arg);
+    			}
     		}
     		
     		Program.state.set(argName, value);
