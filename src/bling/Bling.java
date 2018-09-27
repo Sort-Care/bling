@@ -49,7 +49,6 @@ public class Bling {
     }
     
     public static void updateProgramState(Program p, String[] args, int i) {
-    	// Skip the first argument, it's the program name
     	for (; i < args.length; ++i) {
     		final String arg = args[i];
     		final String argName = "ARG" + i;
