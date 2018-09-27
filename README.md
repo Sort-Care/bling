@@ -20,7 +20,7 @@ mkdir bin
 # Running
 
 ```bash
-./bling program.bling arg1 arg2 arg3
+./bling example/factorial 10
 ```
 
 So easy, right?
@@ -66,10 +66,29 @@ binop ::= expr & expr
        |  expr | expr
 unop ::= !expr
 ```
-
 ### Misc Exprs
 
-Parenthetical expressions are allowed as well
+Both parenthetical and identifier expressions are allowed as well.
+
+## State
+All state is global. That's it. Scoping doesn't exist. Forward declarations
+aren't necessary. Shadowing doesn't exist. It's all global. For instance, the
+following code will not throw an error
+```
+let i = 0;
+while (i < 2) {
+  if (i = 1) {
+    print IM_NOT_DEFINED_YET;
+  }
+  let IM_NOT_DEFINED_YET = 10;
+  let i = i + 1;
+}
+```
+
+## Arguments
+There is very primitive argument handling: any command line arguments will be
+stored in global state under names `ARG1`, `ARG2`, `ARG3`, ... For an example,
+look at `example/factorial.bling` or `example/max.bling`.
 
 # This Repo
 All meta-language (Java) code is located in `src/bling`. This describes the AST.
