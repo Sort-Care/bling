@@ -131,7 +131,7 @@ public class ASTPrinter extends ASTVisitor {
 
 	@Override
 	void visitIdExpr(IdExpr id) {
-		open(String.format("(id-expr [%s]", id.id.name));
+		open(String.format("(id-expr", id.id.name));
 		super.visitIdExpr(id);
 		close();
 	}
@@ -188,7 +188,8 @@ public class ASTPrinter extends ASTVisitor {
 	@Override
 	void visitLetStmt(LetStatement s) {
 		open("(let");
-		super.visitLetStmt(s);
+		s.id.accept(this);
+		s.expr.accept(this);
 		close();
 	}
 

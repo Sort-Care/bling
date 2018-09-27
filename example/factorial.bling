@@ -6,4 +6,4 @@ while (i < ARG1)  {
   let total = total * i;
 }
 
-print total;
+print ARG1 + "! = " + total;

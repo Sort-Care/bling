@@ -34,6 +34,54 @@ Run as above, but with the `--print-ast` option as the first argument:
 
 ```bash
 ./bling --print-ast example/fib.bling
+(program
+  (let
+    (int [0])
+    (id [i]))
+  (let
+    (int [0])
+    (id [a]))
+  (let
+    (int [1])
+    (id [b]))
+  (while
+    (<
+      (id-expr [i]
+        (id [i]))
+      (id-expr [ARG1]
+        (id [ARG1])))
+    (block
+      (let
+        (+
+          (id-expr [a]
+            (id [a]))
+          (id-expr [b]
+            (id [b])))
+        (id [tmp]))
+      (let
+        (id-expr [b]
+          (id [b]))
+        (id [a]))
+      (let
+        (id-expr [tmp]
+          (id [tmp]))
+        (id [b]))
+      (let
+        (+
+          (id-expr [i]
+            (id [i]))
+          (int [1]))
+        (id [i]))))
+  (print 
+    (+
+      (+
+        (+
+          (string [The ])
+          (id-expr [ARG1]
+            (id [ARG1])))
+        (string [th Fibonacci number is ]))
+      (id-expr [a]
+        (id [a])))))
 ```
 
 Note that the program will not run so there is no need to provide other
