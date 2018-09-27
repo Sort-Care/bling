@@ -18,4 +18,10 @@ public class Statements implements ASTNode {
 			s.execute();
 		}
 	}
+
+	@Override
+	public void accept(ASTVisitor visitor) {
+		visitor.visitStatements(this);
+		
+	}
 }

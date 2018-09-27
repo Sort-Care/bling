@@ -22,4 +22,10 @@ public class StringValue extends StringExpr implements Value {
 		return value;
 	}
 
+	@Override
+	public void accept(ASTVisitor visitor) {
+		visitor.visitStringValue(this);
+		
+	}
+
 }

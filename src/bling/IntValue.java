@@ -33,4 +33,9 @@ public class IntValue extends IntExpr implements Value {
 	public String toString() {
 		return value.toString();
 	}
+
+	@Override
+	public void accept(ASTVisitor visitor) {
+		visitor.visitIntValue(this);
+	}
 }

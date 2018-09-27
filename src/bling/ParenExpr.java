@@ -16,4 +16,9 @@ public class ParenExpr implements Expr {
 	public Value evaluate() {
 		return expr.evaluate();
 	}
+
+	@Override
+	public void accept(ASTVisitor visitor) {
+		visitor.visitParenExpr(this);
+	}
 }

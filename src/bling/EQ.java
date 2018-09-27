@@ -30,4 +30,9 @@ public class EQ extends BoolExpr {
 	public BoolValue evaluate() {
         return BoolValue.getBoolValue(lhs.evaluate().equals(rhs.evaluate()));
 	}
+
+	@Override
+	public void accept(ASTVisitor visitor) {
+		visitor.visitEQ(this);
+	}
 }

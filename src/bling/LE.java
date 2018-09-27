@@ -9,4 +9,10 @@ public class LE extends RelOp {
 	protected Boolean compute(Long l, Long r) {
 		return l <= r;
 	}
+
+	@Override
+	public void accept(ASTVisitor visitor) {
+		visitor.visitLE(this);
+		
+	}
 }

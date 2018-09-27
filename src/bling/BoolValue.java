@@ -35,4 +35,9 @@ public class BoolValue extends BoolExpr implements Value {
 	public String toString() {
 		return value.toString();
 	}
+
+	@Override
+	public void accept(ASTVisitor visitor) {
+		visitor.visitBoolValue(this);
+	}
 }

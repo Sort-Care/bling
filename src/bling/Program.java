@@ -24,4 +24,9 @@ public class Program implements ASTNode {
 		stmts.execute();
 	}
 
+	@Override
+	public void accept(ASTVisitor visitor) {
+		visitor.visitProgram(this);
+	}
+
 }

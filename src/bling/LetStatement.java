@@ -25,5 +25,10 @@ public class LetStatement implements Statement {
 		Program.state.set(id, expr.evaluate());
 	}
 
+	@Override
+	public void accept(ASTVisitor visitor) {
+		visitor.visitLetStmt(this);
+	}
+
 
 }

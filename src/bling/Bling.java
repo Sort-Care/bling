@@ -4,14 +4,31 @@ import java.io.File;
 import java.io.FileInputStream;
 
 public class Bling {
+	static boolean printAST = false;
 
     public static void main(String[] argv) throws Exception{
     	if (argv.length < 1) {
     		System.err.println("Usage: bling program [args...]");
     		System.exit(1);
     	}
+    	int i = 0;
+    	boolean parsingArgs = true;
 
-    	File file = new File(argv[0]);
+    	while (parsingArgs) {
+    		String arg = argv[i];
+    		switch (arg) {
+                case "--print-ast":
+                    printAST = true;
+                    break;
+                default:
+                	parsingArgs = false;
+    				break;
+    		}
+    		++i;
+    	}
+    	--i; // back up the arg
+
+    	File file = new File(argv[i++]);
     	FileInputStream fis = new FileInputStream(file);
     	byte[] data = new byte[(int) file.length()];
     	fis.read(data);
@@ -23,13 +40,17 @@ public class Bling {
         p.symbolFactory = s.sf;
         java_cup.runtime.Symbol res = p.parse();
         Program program = (Program)res.value;
-        updateProgramState(program, argv);
-        program.execute();
+        if (printAST) {
+        	(new ASTPrinter()).printProgram(program);
+        } else {
+            updateProgramState(program, argv, i);
+            program.execute();
+        }
     }
     
-    public static void updateProgramState(Program p, String[] args) {
+    public static void updateProgramState(Program p, String[] args, int i) {
     	// Skip the first argument, it's the program name
-    	for (int i = 1; i < args.length; ++i) {
+    	for (; i < args.length; ++i) {
     		final String arg = args[i];
     		final String argName = "ARG" + i;
 

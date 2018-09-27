@@ -10,4 +10,9 @@ public class BoolAnd extends BoolBinOp {
 		Boolean b = ((BoolValue)l.evaluate()).value && ((BoolValue)r.evaluate()).value;
 		return BoolValue.getBoolValue(b);
 	}
+
+	@Override
+	public void accept(ASTVisitor visitor) {
+		visitor.visitBoolAnd(this);
+	}
 }

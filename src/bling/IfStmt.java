@@ -27,4 +27,9 @@ public class IfStmt implements Statement {
 		}
 	}
 
+	@Override
+	public void accept(ASTVisitor visitor) {
+		visitor.visitIfStmt(this);
+	}
+
 }

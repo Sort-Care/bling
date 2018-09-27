@@ -79,4 +79,9 @@ public class Add implements Expr {
 		
 		throw new bling.exception.TypeError("Bad Addition node types");
 	}
+
+	@Override
+	public void accept(ASTVisitor visitor) {
+		visitor.visitAdd(this);
+	}
 }

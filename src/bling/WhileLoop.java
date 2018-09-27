@@ -24,4 +24,9 @@ public class WhileLoop implements Statement {
 		
 	}
 
+	@Override
+	public void accept(ASTVisitor visitor) {
+		visitor.visitWhileLoop(this);
+	}
+
 }

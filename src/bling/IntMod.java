@@ -11,4 +11,9 @@ public class IntMod extends IntBinOp {
 		return l % r;
 	}
 
+	@Override
+	public void accept(ASTVisitor visitor) {
+		visitor.visitIntMod(this);
+	}
+
 }

@@ -12,4 +12,9 @@ public class Block implements Statement {
 			s.execute();
 		}
 	}
+
+	@Override
+	public void accept(ASTVisitor visitor) {
+		visitor.visitBlock(this);
+	}
 }

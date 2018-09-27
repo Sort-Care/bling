@@ -15,4 +15,9 @@ public class Neg extends IntExpr {
 		return new IntValue(-((IntValue)expr.evaluate()).value);
 	}
 
+	@Override
+	public void accept(ASTVisitor visitor) {
+		visitor.visitNeg(this);
+	}
+
 }

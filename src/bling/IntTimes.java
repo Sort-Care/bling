@@ -10,4 +10,9 @@ public class IntTimes extends IntBinOp {
 	protected Long compute(Long l, Long r) {
 		return l * r;
 	}
+
+	@Override
+	public void accept(ASTVisitor visitor) {
+		visitor.visitIntTimes(this);
+	}
 }

@@ -16,4 +16,9 @@ public class Not extends BoolExpr {
         return  BoolValue.getBoolValue(!((BoolValue)operand.evaluate()).value);
 	}
 
+	@Override
+	public void accept(ASTVisitor visitor) {
+		visitor.visitNot(this);
+	}
+
 }

@@ -13,4 +13,9 @@ public class PrintStmt implements Statement {
 		System.out.println(expr.evaluate());
 	}
 
+	@Override
+	public void accept(ASTVisitor visitor) {
+        visitor.visitPrintStmt(this);
+	}
+
 }

@@ -19,4 +19,10 @@ public class IdExpr implements Expr {
 	public Value evaluate() {
 		return Program.state.get(id);
 	}
+
+	@Override
+	public void accept(ASTVisitor visitor) {
+		visitor.visitIdExpr(this);
+		
+	}
 }
